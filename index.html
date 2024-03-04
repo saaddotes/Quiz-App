@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz App</title>
+    <link rel="stylesheet" href="bootstrap.css">
+    <link rel="stylesheet" href="style.css">
+    <!-- Font Awesome Link -->
+    <script src="https://kit.fontawesome.com/87bd7546eb.js" crossorigin="anonymous"></script>
+</head>
+
+<body class="bg-primary">
+    <div class="bg-white container w-lg-50 mt-5 p-4 rounded-3">
+        <div>
+            <i class="fa-regular fa-user"></i>
+            <span id="username">Sign In</span>
+        </div>
+        <div id="user-data">
+            <h1 class="text-center mb-4 text-secondary">
+                Quiz Testing Service
+            </h1>
+
+            <form action="#" method="post">
+                <!-- Input fields and other form elements -->
+                <input id="name" class="w-100 bg-secondary text-white form-control" type="text" name="username"
+                    placeholder="Username">
+                <br>
+                <!-- <input class="w-100 bg-secondary text-white form-control" type="text" name="fathername"
+                placeholder="Fathername" required>
+            <br> -->
+                <input id="roll-number" class="w-100 bg-secondary text-white form-control" type="number"
+                    name="roll-number" placeholder="Roll Number">
+                <br>
+                <select class="w-100 bg-secondary text-white form-control" name="testType" id="test-Type">
+                    <option value="Python">HTML 5</option>
+                    <option value="Python">CSS & Bootstrap</option>
+                    <option value="Python">JavaScript</option>
+                </select>
+                <br>
+                <div class="text-end">
+                    <a class="btn bg-secondary text-white m-auto" onclick="submit()">Next</a>
+                </div>
+            </form>
+        </div>
+
+        <div id="instruction">
+
+            <div>
+                <h1 class="text-center mb-4 text-secondary">Instructions</h1>
+
+                <ul>
+                    <li>
+                        The quiz consists of multiple-choice questions.
+                    </li>
+                    <li>
+                        Each question has multiple options, and you need to select the correct answer.
+                    </li>
+                    <li>
+                        To proceed to the next question, click the "Next" button after selecting your answer.
+                    </li>
+                    <li class="bg-danger">
+                        <span class="text-white">You can't navigate back to the previous question using the browser's
+                            back
+                            button.</span>
+                    </li>
+                    <li class="">
+                        Each correct answer earns you one point.
+                    </li>
+                    <li class="bg-warning">
+                        You have 30 minutes to complete the quiz.
+                    </li>
+
+                </ul>
+                <div class="text-end">
+                    <a class="btn bg-secondary text-white m-auto" onclick="startQuiz()">Start</a>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div id="quiz-container">
+            <h1 class="text-center mb-4 text-secondary">Quiz</h1>
+            <div class="text-end">
+                <span>Count Down: <span id="count-down">40:00</span></span>
+            </div>
+            <div>
+                <h3>Question # <span id="question-number">01</span></h3>
+                <h5 id="question-content" class=""> How many question are there in java Script How many question are
+                    there in java Script ?</h5>
+                <div id="radio-group">
+                    <input type="radio" id="html" name="questionOptions" value="HTML">
+                    <label for="html">HTML</label>
+                    <br>
+                    <input type="radio" id="css" name="questionOptions" value="CSS">
+                    <label for="css">CSS</label>
+                    <br>
+                    <input type="radio" id="javascript" name="questionOptions" value="JavaScript">
+                    <label for="javascript">JavaScript</label>
+                </div>
+
+            </div>
+            <div class="text-end">
+                <button id="next-question-btn" class="btn bg-secondary text-white m-auto"
+                    onclick="nextQuestion()">Next</button>
+            </div>
+        </div>
+    </div>
+
+
+    </div>
+
+    <!-- 
+    <div class="bg-white container w-lg-50 mt-5 p-4 rounded-3">
+
+    </div> -->
+
+    <!-- <div id="quiz-container" class="bg-white container w-lg-50 mt-5 p-4 rounded-3">
+        <div>
+            <i class="fa-regular fa-user"></i>
+            <span id="username"></span>
+        </div>
+    </div> -->
+
+
+    <script src="script.js"></script>
+</body>
+
+</html>

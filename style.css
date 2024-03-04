@@ -1,0 +1,43 @@
+:root {
+  --primary-color: #d98ff9;
+  --secondary-color: #b517f9;
+  --white-color: #fff ;
+}
+
+.bg-primary {
+  background-color: var(--primary-color) !important;
+}
+
+.bg-secondary {
+  background-color: var(--secondary-color) !important;
+}
+
+.text-primary {
+  color: var(--primary-color) !important;
+}
+
+.text-secondary {
+  color: var(--secondary-color) !important;
+}
+
+input::-moz-placeholder {
+  color: var(--white-color) !important;
+}
+
+input::placeholder {
+  color: var(--white-color) !important;
+}
+
+#instruction, #quiz-container {
+  display: none;
+}
+
+.w-lg-50 {
+  width: 95% !important;
+}
+
+@media screen and (min-width: 600px) {
+  .w-lg-50 {
+    width: 50% !important;
+  }
+}/*# sourceMappingURL=style.css.map */
