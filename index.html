@@ -34,9 +34,9 @@
                     name="roll-number" placeholder="Roll Number">
                 <br>
                 <select class="w-100 bg-secondary text-white form-control" name="testType" id="test-Type">
-                    <option value="Python">HTML 5</option>
-                    <option value="Python">CSS & Bootstrap</option>
-                    <option value="Python">JavaScript</option>
+                    <option value="html">HTML 5</option>
+                    <option value="css">CSS & Bootstrap</option>
+                    <option value="javascript">JavaScript</option>
                 </select>
                 <br>
                 <div class="text-end">
@@ -108,9 +108,15 @@
                     onclick="nextQuestion()">Next</button>
             </div>
         </div>
-
+        <!--  -->
         <div id="result-container">
             <h1 class="text-center mb-4 text-secondary">Result</h1>
+            <h2 id="status" class="text-center mb-4 display-3">
+                Fail
+                <i class="fa-regular fa-face-frown-open"></i>
+                <!-- <i class="fa-regular fa-face-smile"></i> -->
+            </h2>
+
             <h3 id="score" class="text-center mb-4 text-secondary"></h3>
 
         </div>
