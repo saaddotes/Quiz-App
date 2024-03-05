@@ -32,7 +32,7 @@ input::placeholder {
   display: none;
 }
 
-.w-lg-50 {
+.w-lg-50, .w-95 {
   width: 95% !important;
 }
 

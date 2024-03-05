@@ -147,13 +147,13 @@ function startQuiz() {
     document.getElementById('instruction').style.display = 'none';
     document.getElementById('quiz-container').style.display = 'block';
 
-    
+
 
     for (let i = 0; i < questionsData.length; i++) {
         questionsData[i].splice(1, 3, ...shuffleArray(questionsData[i].slice(1, 4)));
     }
     shuffleArray(questionsData);
-    
+
 
     // Display the first question
     displayQuestion();
@@ -186,13 +186,23 @@ function displayQuestion() {
             radioInput.id = optionId;
             radioInput.name = 'questionOptions';
             radioInput.value = optionLabel;
+
             let label = document.createElement('label');
+            label.classList.add('w-95')
             label.htmlFor = optionId;
             label.textContent = optionLabel;
-            let br = document.createElement('br');
-            document.getElementById("radio-group").appendChild(radioInput);
-            document.getElementById("radio-group").appendChild(label);
-            document.getElementById("radio-group").appendChild(br);
+
+            // let br = document.createElement('br');
+
+            let divContainer = document.createElement('div');
+            divContainer.classList.add('border', 'p-2', 'rounded', 'd-flex', 'gap-2', 'align-items-center');
+
+            divContainer.appendChild(radioInput);
+            divContainer.appendChild(label);
+
+            let radioGroup = document.getElementById("radio-group");
+            radioGroup.appendChild(divContainer);
+            // radioGroup.appendChild(br);
         }
 
         if (count == questionsData.length) {
