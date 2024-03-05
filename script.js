@@ -2,6 +2,9 @@
 let count = 1;
 var username = 'test';
 let totalQuestion = 0;
+let correctAnswer = '';
+let givenAnswer = '';
+let score = 0;
 
 const questionData = [
     ["What does HTML stand for?", 'Hyper Text Markup Language', 'Hyperlinks and Text Markup Language', 'Home Tool Markup Language', 'Hyper Text Markup Language'],
@@ -103,6 +106,7 @@ function displayQuestion() {
         document.getElementById("question-number").innerHTML = count;
         document.getElementById("question-content").innerHTML = questionData[count - 1][0];
         document.getElementById('next-question-btn').setAttribute('disabled', 'disabled');
+        correctAnswer = questionData[count - 1][4]
 
         // Clear previous radio inputs
         document.getElementById("radio-group").innerHTML = '';
@@ -115,6 +119,9 @@ function displayQuestion() {
             radioInput.type = 'radio';
             radioInput.addEventListener('click', function () {
                 document.getElementById('next-question-btn').removeAttribute('disabled');
+                givenAnswer = optionLabel;
+                console.log(givenAnswer);
+
             });
             radioInput.id = optionId;
             radioInput.name = 'questionOptions';
@@ -142,13 +149,29 @@ function displayQuestion() {
 
 
 function nextQuestion() {
+
+    console.log("correct answer " + correctAnswer);
+    console.log("given answer " + givenAnswer);
     count++;
+    if (givenAnswer.toLowerCase() === correctAnswer.toLowerCase()) {
+        score = score + 1;
+        console.log('correct answer');
+        console.log(score);
+
+    } else {
+        console.log('incorrect answer')
+    }
     displayQuestion();
+
 }
 
 function finishQuiz() {
     // Add finishing logic here (e.g., display results)
-    alert('Congratulations! You have completed the quiz.');
+    document.getElementById('quiz-container').style.display = 'none';
+    document.getElementById('result-container').style.display = 'block'
+    document.getElementById('score').innerHTML = `You got <span>${score}</span> marks out of ${questionData.length}`
+    // document.write(score);
+    // alert('Congratulations! You have completed the quiz.');
 }
 
 

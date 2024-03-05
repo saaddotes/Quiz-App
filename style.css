@@ -28,7 +28,7 @@ input::placeholder {
   color: var(--white-color) !important;
 }
 
-#instruction, #quiz-container {
+#instruction, #quiz-container, #result-container {
   display: none;
 }
 
