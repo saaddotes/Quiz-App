@@ -1,10 +1,15 @@
 
+
+// Variables
 let count = 1;
 var username = 'test';
 let totalQuestion = 0;
 let correctAnswer = '';
 let givenAnswer = '';
 let score = 0;
+
+
+//  ------------------------ Questions Data Start---------------------
 
 const htmlQuestions = [
     ["What does HTML stand for?", 'Hyper Text Markup Language', 'Hyperlinks and Text Markup Language', 'Home Tool Markup Language', 'Hyper Text Markup Language'],
@@ -45,13 +50,12 @@ const javascriptQuestions = [
     ["Which built-in method reverses the order of the elements of an array?", 'reverse()', 'sort()', 'changeOrder()', 'reverse()']
 ];
 
+//  ------------------------ Questions Data End---------------------
 
-// const questionsData = htmlQuestions;
 
 
-// -------------------------------------------------------------------------------------
 
-// Function to shuffle an array using Fisher-Yates algorithm
+// ------------------ Fisher-Yates algorithm to shuffle Array ------------------
 function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
@@ -59,107 +63,9 @@ function shuffleArray(array) {
     }
     return array;
 }
+// ----------------------------------------------------------------------------
 
-// Shuffle the questionsData array
-
-// ---------------------------------------------------------------------------------------------------
-// function submit() {
-//     // Get all input fields 
-//     let inputFields = document.getElementsByTagName('input');
-//     // To check the fields
-//     let check = true;
-
-
-//     // Loop to check fields
-//     for (input of inputFields) {
-//         if (input.value === "") {
-//             // If any field is empty, check will false & loop will break
-//             check = false;
-//             break;
-//         }
-//     }
-
-//     // If check will remain true , it will further proceeds
-//     if (check) {
-//         // Get username to call user later
-//         username = document.getElementById('name').value;
-
-//         // Loop to clear all fields for later use
-//         for (input of inputFields) {
-//             input.value = '';
-//         }
-
-
-//         // Get user-data and instruction div to change their visibilty.
-//         let dataContainer = document.getElementById('user-data');
-//         let insContainer = document.getElementById('instruction');
-
-//         // Change their display
-//         insContainer.style.display = 'block';
-//         dataContainer.style.display = 'none';
-
-//         // Write username to profile
-//         document.getElementById('username').innerHTML = username;
-
-
-
-//     } else {
-//         alert('Please fill in required fields');
-//     }
-// }
-
-
-
-
-
-
-function submit() {
-    // Get the username from the input field
-    username = document.getElementById('name').value;
-    rollNumber = document.getElementById('roll-number').value;
-    testType = document.getElementById('test-Type').value;
-    console.log(testType.value);
-
-    // Validate if username is not empty
-    if (username.trim() === "" || rollNumber.trim() === "") {
-        alert('Please complete all fields');
-        return;
-    }
-
-    if (testType.trim() === 'html') {
-        questionsData = htmlQuestions;
-    } else if (testType.trim() === 'css') {
-        questionsData = cssQuestions;
-    } else {
-        questionsData = javascriptQuestions;
-    }
-
-    // Hide user-data container and show instruction container
-    document.getElementById('user-data').style.display = 'none';
-    document.getElementById('instruction').style.display = 'block';
-
-    // Display the username
-    document.getElementById('username').innerHTML = username;
-}
-
-function startQuiz() {
-    // Hide instruction container and show quiz container
-    document.getElementById('instruction').style.display = 'none';
-    document.getElementById('quiz-container').style.display = 'block';
-
-
-
-    for (let i = 0; i < questionsData.length; i++) {
-        questionsData[i].splice(1, 3, ...shuffleArray(questionsData[i].slice(1, 4)));
-    }
-    shuffleArray(questionsData);
-
-
-    // Display the first question
-    displayQuestion();
-}
-
-
+// -------------------------- Display Function --------------------------------
 function displayQuestion() {
     console.log('Start Working')
     if (count <= questionsData.length) {
@@ -168,10 +74,8 @@ function displayQuestion() {
         document.getElementById('next-question-btn').setAttribute('disabled', 'disabled');
         correctAnswer = questionsData[count - 1][4]
 
-        // Clear previous radio inputs
         document.getElementById("radio-group").innerHTML = '';
 
-        // Create and append new radio inputs for the options
         for (let i = 1; i <= 3; i++) {
             let optionId = `option-${i}`;
             let optionLabel = questionsData[count - 1][i];
@@ -192,7 +96,6 @@ function displayQuestion() {
             label.htmlFor = optionId;
             label.textContent = optionLabel;
 
-            // let br = document.createElement('br');
 
             let divContainer = document.createElement('div');
             divContainer.classList.add('border', 'p-2', 'rounded', 'd-flex', 'gap-2', 'align-items-center');
@@ -202,22 +105,62 @@ function displayQuestion() {
 
             let radioGroup = document.getElementById("radio-group");
             radioGroup.appendChild(divContainer);
-            // radioGroup.appendChild(br);
         }
 
         if (count == questionsData.length) {
             document.getElementById('next-question-btn').innerHTML = 'Finish';
         }
-
-
     }
 
     else {
         finishQuiz();
     }
 }
+// --------------------------------------------------------------------
+
+// -------------------- Submit Function Start -------------------------
+function submit() {
+    username = document.getElementById('name').value;
+    rollNumber = document.getElementById('roll-number').value;
+    testType = document.getElementById('test-Type').value;
+    console.log(testType.value);
+
+    if (username.trim() === "" || rollNumber.trim() === "") {
+        alert('Please complete all fields');
+        return;
+    }
+
+    if (testType.trim() === 'html') {
+        questionsData = htmlQuestions;
+    } else if (testType.trim() === 'css') {
+        questionsData = cssQuestions;
+    } else {
+        questionsData = javascriptQuestions;
+    }
+
+    document.getElementById('user-data').style.display = 'none';
+    document.getElementById('instruction').style.display = 'block';
+
+    document.getElementById('username').innerHTML = username;
+}
+// ----------------------------------------------------------------------
 
 
+// ------------------- Function to Start Quiz -------------------------
+function startQuiz() {
+    document.getElementById('instruction').style.display = 'none';
+    document.getElementById('quiz-container').style.display = 'block';
+
+    for (let i = 0; i < questionsData.length; i++) {
+        questionsData[i].splice(1, 3, ...shuffleArray(questionsData[i].slice(1, 4)));
+    }
+    shuffleArray(questionsData);
+
+    displayQuestion();
+}
+// ---------------------------------------------------------------------
+
+// -------------------------- Next Question Function ---------------------
 function nextQuestion() {
 
     console.log("correct answer " + correctAnswer);
@@ -234,9 +177,10 @@ function nextQuestion() {
     displayQuestion();
 
 }
+// --------------------------------------------------------------------------
 
+// ---------------------- Finish Quiz Function --------------------------------
 function finishQuiz() {
-    // Add finishing logic here (e.g., display results)
     document.getElementById('quiz-container').style.display = 'none';
     document.getElementById('result-container').style.display = 'block'
     document.getElementById('score').innerHTML = `You got <span>${score}</span> marks out of ${questionsData.length}.`
@@ -245,12 +189,10 @@ function finishQuiz() {
         status.innerHTML = 'Congratulations <i class="fa-regular fa-face-smile"></i>'
         status.style.color = 'green'
     } else {
-        // status.innerHTML = "Congratulation"
         status.style.color = 'red'
     }
-    // document.write(score);
-    // alert('Congratulations! You have completed the quiz.');
 }
+// -----------------------------------------------------------------------------
 
 
 
