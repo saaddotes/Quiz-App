@@ -7,6 +7,7 @@ let totalQuestion = 0;
 let correctAnswer = '';
 let givenAnswer = '';
 let score = 0;
+let timeRemains = 30;
 
 
 //  ------------------------ Questions Data Start---------------------
@@ -155,7 +156,7 @@ function startQuiz() {
         questionsData[i].splice(1, 3, ...shuffleArray(questionsData[i].slice(1, 4)));
     }
     shuffleArray(questionsData);
-
+    countDown()
     displayQuestion();
 }
 // ---------------------------------------------------------------------
@@ -194,6 +195,23 @@ function finishQuiz() {
 }
 // -----------------------------------------------------------------------------
 
+// ------------------ Function to Show Count Down ------------------------------
+function countDown() {
+    timeRemains = setInterval(timeout, 1000);
+}
+
+function timeout() {
+    let timeDisplay = document.getElementById('count-down');
+
+    if (timeRemains <= 0) {
+        clearInterval(timeRemains);
+        timeDisplay.innerHTML = 'Time Out'
+
+    }
+    else {
+        timeDisplay.innerHTML = timeRemains--;
+    }
+}
 
 
 
