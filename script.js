@@ -8,6 +8,11 @@ let correctAnswer = '';
 let givenAnswer = '';
 let score = 0;
 let timeRemains = 30;
+// Display Containers
+let userDataContainer = document.getElementById('user-data');
+let instructionContainer = document.getElementById('instruction');
+let quizContainer = document.getElementById('quiz-container');
+let resultContainer = document.getElementById('result-container');
 
 
 //  ------------------------ Questions Data Start---------------------
@@ -68,7 +73,6 @@ function shuffleArray(array) {
 
 // -------------------------- Display Function --------------------------------
 function displayQuestion() {
-    console.log('Start Working')
     if (count <= questionsData.length) {
         document.getElementById("question-number").innerHTML = count;
         document.getElementById("question-content").innerHTML = questionsData[count - 1][0];
@@ -119,53 +123,60 @@ function displayQuestion() {
 }
 // --------------------------------------------------------------------
 
-// -------------------- Submit Function Start -------------------------
+// --------------------Function to Submit User's Data -------------------------
 function submit() {
     username = document.getElementById('name').value;
     rollNumber = document.getElementById('roll-number').value;
     testType = document.getElementById('test-Type').value;
-    console.log(testType.value);
 
-    if (username.trim() === "" || rollNumber.trim() === "") {
-        alert('Please complete all fields');
-        return;
-    }
+    // Check If Fields are null , show alert 
+    if (username.trim() != "" && rollNumber.trim() != "") {
 
-    if (testType.trim() === 'html') {
-        questionsData = htmlQuestions;
-    } else if (testType.trim() === 'css') {
-        questionsData = cssQuestions;
+        if (testType.trim() === 'html') {
+            questionsData = htmlQuestions;
+        } else if (testType.trim() === 'css') {
+            questionsData = cssQuestions;
+        } else {
+            questionsData = javascriptQuestions;
+        }
+
+        // Hide the user-data div 
+        userDataContainer.style.display = 'none';
+        // Show the instruction div 
+        instructionContainer.style.display = 'block';
+        // Show the profile of User
+        document.getElementById('username').innerHTML = username;
+
     } else {
-        questionsData = javascriptQuestions;
+        // Alert if fields are Empty
+        alert('Please complete all fields');
     }
-
-    document.getElementById('user-data').style.display = 'none';
-    document.getElementById('instruction').style.display = 'block';
-
-    document.getElementById('username').innerHTML = username;
 }
 // ----------------------------------------------------------------------
 
 
 // ------------------- Function to Start Quiz -------------------------
 function startQuiz() {
-    document.getElementById('instruction').style.display = 'none';
-    document.getElementById('quiz-container').style.display = 'block';
+    console.log(instructionContainer.style.display);
+    instructionContainer.style.display = 'none';
+    quizContainer.style.display = 'block';
 
-    for (let i = 0; i < questionsData.length; i++) {
-        questionsData[i].splice(1, 3, ...shuffleArray(questionsData[i].slice(1, 4)));
-    }
     shuffleArray(questionsData);
-    countDown()
+    shuffleOptions()
+    // countDown()
     displayQuestion();
 }
 // ---------------------------------------------------------------------
 
+function shuffleOptions() {
+    for (let i = 0; i < questionsData.length; i++) {
+        questionsData[i].splice(1, 3, ...shuffleArray(questionsData[i].slice(1, 4)));
+    }
+}
+
 // -------------------------- Next Question Function ---------------------
 function nextQuestion() {
 
-    console.log("correct answer " + correctAnswer);
-    console.log("given answer " + givenAnswer);
     count++;
     if (givenAnswer.toLowerCase() === correctAnswer.toLowerCase()) {
         score = score + 1;
@@ -182,8 +193,8 @@ function nextQuestion() {
 
 // ---------------------- Finish Quiz Function --------------------------------
 function finishQuiz() {
-    document.getElementById('quiz-container').style.display = 'none';
-    document.getElementById('result-container').style.display = 'block'
+    quizContainer.style.display = 'none';
+    resultContainer.style.display = 'block'
     document.getElementById('score').innerHTML = `You got <span>${score}</span> marks out of ${questionsData.length}.`
     let status = document.getElementById('status')
     if (score > 6) {
