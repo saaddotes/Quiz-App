@@ -157,13 +157,16 @@ function submit() {
 
 // ------------------- Function to Start Quiz -------------------------
 function startQuiz() {
-    console.log(instructionContainer.style.display);
+    // Hide the Instructions Container
     instructionContainer.style.display = 'none';
+    // Show the Quiz Container
     quizContainer.style.display = 'block';
 
+    // Shuffle the Questions
     shuffleArray(questionsData);
+    // Shuffle the Options
     shuffleOptions()
-    // countDown()
+    // Display the first Question
     displayQuestion();
 }
 // ---------------------------------------------------------------------
